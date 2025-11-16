@@ -136,6 +136,7 @@ export const getVotingDataForSession = async (sessionId: string): Promise<MP[]> 
       name: row.voter_name ?? `MP ${party} ${index + 1}`,
       party,
       vote: row.vote_category ?? "abstain",
+      vote_category:normalizeVoteOption(row.vote_category) as VoteType,
       // constituency: row.constituency ?? "Unknown",  // ✅ เพิ่มกลับมา
       // isProportional: row.is_proportional ?? false, // ✅ เพิ่มกลับมา
       seatNumber: updatedMPs.length + index + 1,
@@ -199,15 +200,13 @@ export const generateMPHistory = async (
       date: row.start_date || '',
       vote: normalizeVoteOption(row.vote_option) as VoteType
     }));
-
     // 3) นับจำนวนแต่ละประเภท
     const total = votes.length || 1;
-    const agreeCount = votes.filter(v => v.vote === 'agree').length;
-    const disagreeCount = votes.filter(v => v.vote === 'disagree').length;
-    const abstainCount = votes.filter(v => v.vote === 'abstain').length;
-    const absentCount = votes.filter(v => v.vote === 'absent').length;
-    const noVoteCount = votes.filter(v => v.vote === 'no-vote').length;
-
+    const agreeCount = votes.filter(v => v.vote === 'เห็นด้วย').length;
+    const disagreeCount = votes.filter(v => v.vote === 'ไม่เห็นด้วย').length;
+    const abstainCount = votes.filter(v => v.vote === 'งดออกเสียง').length;
+    const absentCount = votes.filter(v => v.vote === 'ลา/ขาด').length;
+    const noVoteCount = votes.filter(v => v.vote === 'ไม่ลงคะแนน').length;
     return {
       mpId,
       votes,
@@ -237,11 +236,11 @@ function normalizeVoteOption(voteOption: string): VoteType {
   const normalized = (voteOption || '').toLowerCase().trim();
   
   // แปลงค่าต่าง ๆ ให้เป็น standard VoteType
-  if (normalized.includes('agree') || normalized === 'เห็นด้วย') return 'agree';
-  if (normalized.includes('disagree') || normalized === 'ไม่เห็นด้วย') return 'disagree';
-  if (normalized.includes('abstain') || normalized === 'งดออกเสียง') return 'abstain';
-  if (normalized.includes('absent') || normalized === 'ขาด') return 'absent';
-  if (normalized.includes('no') && normalized.includes('vote')) return 'no-vote';
+  if (normalized.includes('agree') || normalized === 'เห็นด้วย') return 'เห็นด้วย';
+  if (normalized.includes('disagree') || normalized === 'ไม่เห็นด้วย') return 'ไม่เห็นด้วย';
+  if (normalized.includes('abstain') || normalized === 'งดออกเสียง') return 'งดออกเสียง';
+  if (normalized.includes('absent') || normalized === 'ขาด') return 'ลา/ขาด';
+  if (normalized.includes('no') && normalized.includes('vote')) return 'ไม่ลงคะแนน';
   
-  return 'abstain'; // default
+  return 'งดออกเสียง'; // default
 }

@@ -23,22 +23,22 @@ const MPProfileSidebar = ({ mp, history, open, onClose }: MPProfileSidebarProps)
 
   const getVoteIcon = (vote: string) => {
     switch (vote) {
-      case 'agree':
+      case 'เห็นด้วย':
         return <Check className="w-4 h-4 text-success" />;
-      case 'disagree':
+      case 'ไม่เห็นด้วย':
         return <X className="w-4 h-4 text-destructive" />;
-      case 'abstain':
+      case 'งดออกเสียง':
         return <Minus className="w-4 h-4 text-abstain" />;
     }
   };
 
   const getVoteBadgeVariant = (vote: string) => {
     switch (vote) {
-      case 'agree':
+      case 'เห็นด้วย':
         return 'default';
-      case 'disagree':
+      case 'ไม่เห็นด้วย':
         return 'destructive';
-      case 'abstain':
+      case 'งดออกเสียง':
         return 'secondary';
       default:
         return 'outline';
@@ -88,14 +88,14 @@ const MPProfileSidebar = ({ mp, history, open, onClose }: MPProfileSidebarProps)
                 </p>
               </Card>
               <Card className="p-4 border-destructive/20">
-                <div className="flex items-center gap-2 mb-2">
-                  <X className="w-4 h-4 text-destructive" />
-                  <span className="text-sm font-medium">Disagree</span>
-                </div>
-                <p className="text-2xl font-bold text-destructive">
-                  {history.disagreePercentage}%
-                </p>
-              </Card>
+              <div className="flex items-center gap-2 mb-2">
+                <X className="w-4 h-4 text-red-500" />
+                <span className="text-sm font-medium">ไม่เห็นด้วย</span>
+              </div>
+              <p className="text-2xl font-bold text-red-600 dark:text-red-500">
+                {history.disagreePercentage}%
+              </p>
+            </Card>
               <Card className="p-4 border-abstain/20">
                 <div className="flex items-center gap-2 mb-2">
                   <Minus className="w-4 h-4 text-abstain" />

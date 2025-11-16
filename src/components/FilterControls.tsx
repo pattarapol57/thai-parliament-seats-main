@@ -31,11 +31,11 @@ const FilterControls = ({
   const [voteOpen, setVoteOpen] = useState(false);
 
   const voteOptions: { value: VoteType; label: string }[] = [
-    { value: 'agree', label: 'Agree' },
-    { value: 'disagree', label: 'Disagree' },
-    { value: 'abstain', label: 'Abstain' },
-    { value: 'absent', label: 'Absent' },
-    { value: 'no-vote', label:'No-Vote' },
+    { value: 'agree', label: 'เห็นด้วย' },
+    { value: 'disagree', label: 'ไม่เห็นด้วย' },
+    { value: 'abstain', label: 'งดออกเสียง' },
+    { value: 'absent', label: 'ลา/ขาด' },
+    { value: 'no-vote', label:'ไม่ลงคะแนน' },
   ];
 
   const toggleParty = (party: string) => {

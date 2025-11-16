@@ -66,7 +66,7 @@ const ParliamentVisualization = ({
     const partyKey = party.toLowerCase().replace(/\s+/g, "-");
 
     const partyColorValues: { [key: string]: string } = {
-        "ประชาชน": "#ff0055",
+        "ประชาชน": "#ff6a00",
         "ใหม่": "#8b00ff",
         "เสรีรวมไทย": "#1e90ff",
         "พลังสังคมใหม่": "#ff8c00",
@@ -84,7 +84,11 @@ const ParliamentVisualization = ({
         "พลังประชารัฐ": "#0066cc",
         "ภูมิใจไทย": "#0099cc",
         "เพื่อไทย": "#cc0000",
+        "กล้าธรรม":"#ff7f50",
+        "ชาติพัฒนา":"#228b22",
+        "ไทยก้าวหน้า":"#7a5cff"
     };
+
 
     return partyColorValues[partyKey] || "hsl(240, 5%, 65%)";
   };
@@ -165,7 +169,6 @@ const ParliamentVisualization = ({
     const position =
       layout === "semicircle" ? calculateSemicirclePosition(index, sortedMPs.length) : { x: "0%", y: "0%", row: 0 };
 
-    const partyColor = getPartyColor(mp.party);
     const partyColorValue = getPartyColorValue(mp.party);
 
     return (
@@ -196,11 +199,10 @@ const ParliamentVisualization = ({
                 className={cn(
                   "w-[16px] h-[16px] rounded-full transition-all duration-300 flex items-center justify-center relative",
                   "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1",
-                  layout === "grid" && partyColor,
                   (hoveredMP === mp.id || isHighlighted) && "scale-[1.8] ring-4 ring-primary z-20 shadow-lg",
                   !isFiltered && !isHighlighted && "opacity-20",
                 )}
-                style={layout === "semicircle" ? { backgroundColor: partyColorValue } : undefined}
+                style={{ backgroundColor: partyColorValue }}
               >
                 {getVoteIcon(mp.vote)}
               </button>
@@ -210,9 +212,6 @@ const ParliamentVisualization = ({
             <div className="space-y-1">
               <p className="font-semibold">{mp.name}</p>
               <p className="text-sm text-muted-foreground">{mp.party}</p>
-              {/* <p className="text-sm text-muted-foreground">
-                {mp.constituency} {mp.isProportional && "(Proportional)"}
-              </p> */}
               <p className="text-sm font-medium capitalize mt-2">
                 Vote:{" "}
                 <span
@@ -222,7 +221,7 @@ const ParliamentVisualization = ({
                     mp.vote === "abstain" && "text-abstain",
                   )}
                 >
-                  {mp.vote}
+                  {mp.vote_category}
                 </span>
               </p>
             </div>
