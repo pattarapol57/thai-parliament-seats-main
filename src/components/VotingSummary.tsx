@@ -74,7 +74,7 @@ const VotingSummary = ({
                   {currentSession.result === 'withdrawn' && 'ถอนมติ'}
                 </span>
               </div>
-              <p className="text-sm text-muted-foreground mt-2">{currentSession.description}</p>
+              <p className="text-sm text-muted-foreground mt-2"></p>
             </div>
 
             <Button

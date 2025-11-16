@@ -109,7 +109,7 @@ const ParliamentVisualization = ({
   };
 
   const calculateSemicirclePosition = (index: number, total: number) => {
-    const rows = 12; // จำนวนแถวทั้งหมด
+    const rows = 13; // จำนวนแถวทั้งหมด
 
     // คำนวณจำนวนที่นั่งในแต่ละแถว
     const seatsPerRowArray: number[] = [];
@@ -217,7 +217,6 @@ const ParliamentVisualization = ({
                 <span
                   className={cn(
                     mp.vote === "agree" && "text-success",
-                    mp.vote === "disagree" && "text-destructive",
                     mp.vote === "abstain" && "text-abstain",
                   )}
                 >
