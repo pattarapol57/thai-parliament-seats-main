@@ -61,7 +61,7 @@ const FilterControls = ({
     <Card className="p-4">
       <div className="flex flex-wrap items-center gap-4">
         <div className="flex-1 min-w-[250px]">
-          <label className="text-sm font-medium mb-2 block">Political Party</label>
+          <label className="text-sm font-medium mb-2 block">พรรคการเมือง</label>
           <Popover open={partyOpen} onOpenChange={setPartyOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -72,7 +72,7 @@ const FilterControls = ({
               >
                 <div className="flex flex-wrap gap-1 flex-1">
                   {selectedParties.length === 0 ? (
-                    <span className="text-muted-foreground">Select parties...</span>
+                    <span className="text-muted-foreground">เลือกพรรคการเมือง...</span>
                   ) : (
                     selectedParties.map((party) => (
                       <Badge key={party} variant="secondary" className="text-xs">
@@ -88,7 +88,7 @@ const FilterControls = ({
               <Command>
                 <CommandInput placeholder="Search parties..." />
                 <CommandList>
-                  <CommandEmpty>No party found.</CommandEmpty>
+                  <CommandEmpty>ไม่พบพรรคการเมือง.</CommandEmpty>
                   <CommandGroup>
                     {parties.map((party) => (
                       <CommandItem
@@ -126,7 +126,7 @@ const FilterControls = ({
         </div>
 
         <div className="flex-1 min-w-[250px]">
-          <label className="text-sm font-medium mb-2 block">Vote Type</label>
+          <label className="text-sm font-medium mb-2 block">การลงมติ</label>
           <Popover open={voteOpen} onOpenChange={setVoteOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -137,7 +137,7 @@ const FilterControls = ({
               >
                 <div className="flex flex-wrap gap-1 flex-1">
                   {selectedVotes.length === 0 ? (
-                    <span className="text-muted-foreground">Select vote types...</span>
+                    <span className="text-muted-foreground">เลือกการลงมติ...</span>
                   ) : (
                     selectedVotes.map((vote) => (
                       <Badge key={vote} variant="secondary" className="text-xs capitalize">

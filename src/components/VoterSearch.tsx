@@ -56,7 +56,7 @@ const VoterSearch = ({ mps, selectedMPs, onMPsChange }: VoterSearchProps) => {
   return (
     <Card className="p-4">
       <div className="space-y-2">
-        <label className="text-sm font-medium block">ค้นหา Voter</label>
+        <label className="text-sm font-medium block">ค้นหา สส.</label>
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <Button
@@ -67,7 +67,7 @@ const VoterSearch = ({ mps, selectedMPs, onMPsChange }: VoterSearchProps) => {
             >
               <div className="flex flex-wrap gap-1 flex-1">
                 {selectedMPs.length === 0 ? (
-                  <span className="text-muted-foreground">พิมพ์ชื่อ voter...</span>
+                  <span className="text-muted-foreground">พิมพ์ชื่อ สส...</span>
                 ) : (
                   selectedMPs.map((mp) => (
                     <div
