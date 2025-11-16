@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { generateMockMPs, fetchSessions, generateMPHistory, getVotingDataForSession } from "@/data/mockData";
 import { MP, LayoutType, VoteType, VotingSession, MPHistory } from "@/types/parliament";
-
+import { Check, X, Minus, UserX, Ban } from "lucide-react";  // ✅ เพิ่ม import
 import ParliamentVisualization from "@/components/ParliamentVisualization";
 import MPProfileSidebar from "@/components/MPProfileSidebar";
 import FilterControls from "@/components/FilterControls";
@@ -211,26 +211,40 @@ const Index = () => {
 
                 {/* 10% - Explanation */}
                 <div className="flex-[0.1] overflow-auto">
-                  <div className="text-center text-sm text-muted-foreground space-y-2">
-                    <p>คลิกที่จุดเพื่อดูประวัติการโหวตของ MP • สีของจุดแสดงพรรคการเมือง • ไอคอนแสดงการโหวต</p>
-                    <div className="flex items-center justify-center gap-6">
+                  <div className="text-center text-sm text-muted-foreground space-y-3">
+                    <p className="font-medium">
+                      คลิกที่จุดเพื่อดูประวัติการโหวตของ สส. • สีของจุดแสดงพรรคการเมือง • ไอคอนแสดงการโหวต
+                    </p>
+                    
+                    <div className="flex items-center justify-center gap-6 flex-wrap">
+                      {/* เห็นด้วย */}
                       <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-success flex items-center justify-center">
-                          <span className="text-[8px] text-white">✓</span>
-                        </div>
-                        <span>เห็นด้วย</span>
+                        <Check className="w-5 h-5 text-gray-600" />
+                        <span className="text-xs font-medium">เห็นด้วย</span>
                       </div>
+
+                      {/* ไม่เห็นด้วย */}
                       <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-destructive flex items-center justify-center">
-                          <span className="text-[8px] text-white">✕</span>
-                        </div>
-                        <span>ไม่เห็นด้วย</span>
+                        <X className="w-5 h-5 text-gray-600" />
+                        <span className="text-xs font-medium">ไม่เห็นด้วย</span>
                       </div>
+
+                      {/* งดออกเสียง */}
                       <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-abstain flex items-center justify-center">
-                          <span className="text-[8px] text-white">−</span>
-                        </div>
-                        <span>งดออกเสียง</span>
+                        <Minus className="w-5 h-5 text-gray-600" />
+                        <span className="text-xs font-medium">งดออกเสียง</span>
+                      </div>
+
+                      {/* ลา/ขาด */}
+                      <div className="flex items-center gap-2">
+                        <UserX className="w-5 h-5 text-gray-600" />
+                        <span className="text-xs font-medium">ลา/ขาด</span>
+                      </div>
+
+                      {/* ไม่ลงคะแนน */}
+                      <div className="flex items-center gap-2">
+                        <Ban className="w-5 h-5 text-gray-700" />
+                        <span className="text-xs font-medium">ไม่ลงคะแนน</span>
                       </div>
                     </div>
                   </div>
