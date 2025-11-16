@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import { Check, X, Minus, MapPin, Award } from 'lucide-react';
+import { Check, X, Minus, UserX, Ban } from 'lucide-react';  // ✅ เพิ่ม UserX, Ban
 import { cn } from '@/lib/utils';
 
 interface MPProfileSidebarProps {
@@ -23,23 +23,43 @@ const MPProfileSidebar = ({ mp, history, open, onClose }: MPProfileSidebarProps)
 
   const getVoteIcon = (vote: string) => {
     switch (vote) {
+      case 'agree':
       case 'เห็นด้วย':
-        return <Check className="w-4 h-4 text-success" />;
+        return <Check className="w-4 h-4 text-green-600" />;
+      case 'disagree':
       case 'ไม่เห็นด้วย':
-        return <X className="w-4 h-4 text-destructive" />;
+        return <X className="w-4 h-4 text-red-600" />;
+      case 'abstain':
       case 'งดออกเสียง':
-        return <Minus className="w-4 h-4 text-abstain" />;
+        return <Minus className="w-4 h-4 text-yellow-600" />;
+      case 'absent':
+      case 'ลา/ขาด':
+        return <UserX className="w-4 h-4 text-gray-600" />;  // ✅ เพิ่ม
+      case 'no-vote':
+      case 'ไม่ลงคะแนน':
+        return <Ban className="w-4 h-4 text-gray-700" />;  // ✅ เพิ่ม
+      default:
+        return null;
     }
   };
 
   const getVoteBadgeVariant = (vote: string) => {
     switch (vote) {
+      case 'agree':
       case 'เห็นด้วย':
         return 'default';
+      case 'disagree':
       case 'ไม่เห็นด้วย':
         return 'destructive';
+      case 'abstain':
       case 'งดออกเสียง':
         return 'secondary';
+      case 'absent':
+      case 'ลา/ขาด':
+        return 'outline';  // ✅ เพิ่ม
+      case 'no-vote':
+      case 'ไม่ลงคะแนน':
+        return 'outline';  // ✅ เพิ่ม
       default:
         return 'outline';
     }
@@ -59,57 +79,74 @@ const MPProfileSidebar = ({ mp, history, open, onClose }: MPProfileSidebarProps)
               </div>
             </SheetDescription>
           </div>
-
-          {/* <div className="flex items-start gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1">
-              <MapPin className="w-4 h-4" />
-              <span>{mp.constituency}</span>
-            </div>
-            {mp.isProportional && (
-              <div className="flex items-center gap-1">
-                <Award className="w-4 h-4" />
-                <span>Proportional</span>
-              </div>
-            )}
-          </div> */}
         </SheetHeader>
 
         <div className="mt-8 space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-4">Voting Statistics</h3>
-            <div className="grid grid-cols-3 gap-4">
-              <Card className="p-4 border-success/20">
+            <h3 className="text-lg font-semibold mb-4">สถิติการลงมติ</h3>
+            {/* ✅ เปลี่ยนเป็น grid-cols-2 md:grid-cols-5 */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              
+              {/* เห็นด้วย */}
+              <Card className="p-4 border-green-200 dark:border-green-800">
                 <div className="flex items-center gap-2 mb-2">
-                  <Check className="w-4 h-4 text-success" />
+                  <Check className="w-4 h-4 text-green-600 dark:text-green-400" />
                   <span className="text-sm font-medium">เห็นด้วย</span>
                 </div>
-                <p className="text-2xl font-bold text-success">
+                <p className="text-2xl font-bold text-green-600 dark:text-green-400">
                   {history.agreePercentage}%
                 </p>
               </Card>
-              <Card className="p-4 border-destructive/20">
-              <div className="flex items-center gap-2 mb-2">
-                <X className="w-4 h-4 text-red-500" />
-                <span className="text-sm font-medium">ไม่เห็นด้วย</span>
-              </div>
-              <p className="text-2xl font-bold text-red-600 dark:text-red-500">
-                {history.disagreePercentage}%
-              </p>
-            </Card>
-              <Card className="p-4 border-abstain/20">
+
+              {/* ไม่เห็นด้วย */}
+              <Card className="p-4 border-red-200 dark:border-red-800">
                 <div className="flex items-center gap-2 mb-2">
-                  <Minus className="w-4 h-4 text-abstain" />
+                  <X className="w-4 h-4 text-red-600 dark:text-red-400" />
+                  <span className="text-sm font-medium">ไม่เห็นด้วย</span>
+                </div>
+                <p className="text-2xl font-bold text-red-600 dark:text-red-400">
+                  {history.disagreePercentage}%
+                </p>
+              </Card>
+
+              {/* งดออกเสียง */}
+              <Card className="p-4 border-yellow-200 dark:border-yellow-800">
+                <div className="flex items-center gap-2 mb-2">
+                  <Minus className="w-4 h-4 text-yellow-600 dark:text-yellow-400" />
                   <span className="text-sm font-medium">งดออกเสียง</span>
                 </div>
-                <p className="text-2xl font-bold text-abstain">
+                <p className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
                   {history.abstainPercentage}%
                 </p>
               </Card>
+
+              {/* ✅ ลา/ขาด */}
+              <Card className="p-4 border-gray-200 dark:border-gray-700">
+                <div className="flex items-center gap-2 mb-2">
+                  <UserX className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                  <span className="text-sm font-medium">ลา/ขาด</span>
+                </div>
+                <p className="text-2xl font-bold text-gray-600 dark:text-gray-400">
+                  {history.absentPercentage}%
+                </p>
+              </Card>
+
+              {/* ✅ ไม่ลงคะแนน */}
+              <Card className="p-4 border-gray-200 dark:border-gray-700">
+                <div className="flex items-center gap-2 mb-2">
+                  <Ban className="w-4 h-4 text-gray-700 dark:text-gray-500" />
+                  <span className="text-sm font-medium">ไม่ลงคะแนน</span>
+                </div>
+                <p className="text-2xl font-bold text-gray-700 dark:text-gray-500">
+                  {history.noVotePercentage}%
+                </p>
+              </Card>
+
             </div>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4">Recent Voting History</h3>
+            <h3 className="text-lg font-semibold mb-4">ประวัติการลงมติล่าสุด</h3>
             <div className="space-y-3">
               {history.votes.slice(0, 10).map((vote, index) => (
                 <Card key={index} className="p-4">

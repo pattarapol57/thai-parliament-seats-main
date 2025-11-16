@@ -239,8 +239,8 @@ function normalizeVoteOption(voteOption: string): VoteType {
   if (normalized.includes('agree') || normalized === 'เห็นด้วย') return 'เห็นด้วย';
   if (normalized.includes('disagree') || normalized === 'ไม่เห็นด้วย') return 'ไม่เห็นด้วย';
   if (normalized.includes('abstain') || normalized === 'งดออกเสียง') return 'งดออกเสียง';
-  if (normalized.includes('absent') || normalized === 'ขาด') return 'ลา/ขาด';
-  if (normalized.includes('no') && normalized.includes('vote')) return 'ไม่ลงคะแนน';
+  if (normalized.includes('absent') || normalized.includes('ขาด') ) return 'ลา/ขาด';
+  if (normalized.includes('no') || normalized.includes('ไม่ลงคะแนนเสียง')) return 'ไม่ลงคะแนน';
   
   return 'งดออกเสียง'; // default
 }
