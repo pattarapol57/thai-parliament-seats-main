@@ -61,12 +61,13 @@ const VotingSummary = ({
               <p className="text-muted-foreground mt-1">{currentSession.date}</p>
               <div className="flex items-center gap-2 mt-2">
                 <span className="text-sm font-medium">มตินี้ผลโหวตเป็น:</span>
+                {/* ✅ แก้สีให้ชัดเจน */}
                 <span className={cn(
-                  "text-sm font-bold px-3 py-1 rounded-full",
-                  currentSession.result === 'passed' && "bg-success/20 text-success",
-                  currentSession.result === 'failed' && "bg-destructive/20 text-destructive",
-                  currentSession.result === 'pending' && "bg-warning/20 text-warning",
-                  currentSession.result === 'withdrawn' && "bg-muted text-muted-foreground"
+                  "text-sm font-bold px-3 py-1 rounded-full whitespace-nowrap",
+                  currentSession.result === 'passed' && "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400",
+                  currentSession.result === 'failed' && "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400",
+                  currentSession.result === 'pending' && "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400",
+                  currentSession.result === 'withdrawn' && "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-400"
                 )}>
                   {currentSession.result === 'passed' && 'ผ่าน'}
                   {currentSession.result === 'failed' && 'ไม่ผ่าน'}
