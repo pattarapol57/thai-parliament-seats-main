@@ -81,7 +81,7 @@ const MPProfileSidebar = ({ mp, history, open, onClose }: MPProfileSidebarProps)
               <Card className="p-4 border-success/20">
                 <div className="flex items-center gap-2 mb-2">
                   <Check className="w-4 h-4 text-success" />
-                  <span className="text-sm font-medium">Agree</span>
+                  <span className="text-sm font-medium">เห็นด้วย</span>
                 </div>
                 <p className="text-2xl font-bold text-success">
                   {history.agreePercentage}%
@@ -99,7 +99,7 @@ const MPProfileSidebar = ({ mp, history, open, onClose }: MPProfileSidebarProps)
               <Card className="p-4 border-abstain/20">
                 <div className="flex items-center gap-2 mb-2">
                   <Minus className="w-4 h-4 text-abstain" />
-                  <span className="text-sm font-medium">Abstain</span>
+                  <span className="text-sm font-medium">งดออกเสียง</span>
                 </div>
                 <p className="text-2xl font-bold text-abstain">
                   {history.abstainPercentage}%
